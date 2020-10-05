@@ -32,6 +32,14 @@ public class Stock {
         return false;
     }
 
+    public void addToStock(Product product, int quantity){
+        if (checkIfProductOnStock(product)) {
+            productsOnStock.computeIfPresent(product, (k, v) -> v + quantity);
+        } else {
+            productsOnStock.put(product, quantity);
+        }
+    }
+
     public void printStock() {
         System.out.println("\nStock:");
         System.out.println("Product: \tAmount:");
