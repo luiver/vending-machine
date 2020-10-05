@@ -17,7 +17,7 @@ public abstract class Wallet {
     }
 
     public boolean checkIfCoinInWallet(Coin coin) {
-        return coins.get(coin) > 0;
+        return (coins.get(coin) != null && coins.get(coin) > 0);
     }
 
     public void removeFromWallet(Coin coin, int quantity){
