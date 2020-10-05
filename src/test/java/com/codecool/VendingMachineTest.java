@@ -82,4 +82,36 @@ class VendingMachineTest {
         vendingMachine.insertCoin(Coin.HALF);
         assertEquals(3.15, vendingMachine.countTotalValueOfInsertedCoins());
     }
+
+    @Test
+    void shouldReturnTrue_whenCanAffordBuyAllOrderedProducts(){
+        vendingMachine.getStock().populateStock();
+        vendingMachine.insertCoin(Coin.DOLLAR);
+        vendingMachine.insertCoin(Coin.DOLLAR);
+        vendingMachine.insertCoin(Coin.DIME);
+        vendingMachine.insertCoin(Coin.NICKEL);
+        vendingMachine.insertCoin(Coin.QUARTER);
+        vendingMachine.insertCoin(Coin.QUARTER);
+        vendingMachine.insertCoin(Coin.HALF);
+        vendingMachine.orderProduct(Product.COLA);
+        vendingMachine.orderProduct(Product.COLA);
+        vendingMachine.orderProduct(Product.CANDY);
+        vendingMachine.orderProduct(Product.CHIPS);
+        assertTrue(vendingMachine.checkIfCanAffordForPurchase());
+    }
+
+    @Test
+    void shouldReturnTrue_whenThereIsChangeToGive(){
+        vendingMachine.getStock().populateStock();
+        vendingMachine.insertCoin(Coin.DOLLAR);
+        vendingMachine.orderProduct(Product.CHIPS);
+        assertTrue(vendingMachine.checkIfNeedToGiveTheChange());
+    }
+    @Test
+    void shouldReturnFalse_whenThereIsNoChangeToGive(){
+        vendingMachine.getStock().populateStock();
+        vendingMachine.insertCoin(Coin.DOLLAR);
+        vendingMachine.orderProduct(Product.COLA);
+        assertFalse(vendingMachine.checkIfNeedToGiveTheChange());
+    }
 }
