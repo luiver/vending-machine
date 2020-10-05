@@ -23,13 +23,19 @@ class VendingMachineTest {
 
     @Test
     void shouldReturnNull_whenInvalidCoinInserted(){
-        vendingMachine.insertCoin(Coin.PENNY);
-        assertEquals(vendingMachine.getInsertedCoins().get(Coin.DIME),null);
+        assertNull(vendingMachine.getInsertedCoins().get(Coin.PENNY));
     }
 
     @Test
-    void shouldReturnTrue_whenCoinInserted(){
+    void shouldAddNewCoinIntoInsertedCoins_whenCoinInserted(){
         vendingMachine.insertCoin(Coin.DIME);
         assertEquals(vendingMachine.getInsertedCoins().get(Coin.DIME),1);
+    }
+
+    @Test
+    void shouldUpdateCoinsAmount_whenSecondSameCoinInserted(){
+        vendingMachine.insertCoin(Coin.DIME);
+        vendingMachine.insertCoin(Coin.DIME);
+        assertEquals(vendingMachine.getInsertedCoins().get(Coin.DIME),2);
     }
 }
