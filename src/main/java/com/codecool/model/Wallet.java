@@ -3,21 +3,14 @@ package com.codecool.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Wallet {
-    private Map<Coin, Integer> coins;
+public abstract class Wallet {
+    public Map<Coin, Integer> coins;
 
     public Wallet() {
         this.coins = new HashMap<>();
     }
 
-    public void populate() {
-        coins.put(Coin.PENNY, 100);
-        coins.put(Coin.NICKEL, 100);
-        coins.put(Coin.DIME, 50);
-        coins.put(Coin.QUARTER, 10);
-        coins.put(Coin.HALF, 10);
-        coins.put(Coin.DOLLAR, 10);
-    }
+    public abstract void populateWallet();
 
     public boolean checkIfSufficientCoinsInWallet(Coin coin, int quantity) {
         return (coins.get(coin) - quantity) >= 0;
@@ -31,9 +24,17 @@ public class Wallet {
         coins.computeIfPresent(coin, (k, v) -> v - quantity);
     }
 
-    public void printWallet(){
-        System.out.println("\nYour Wallet:");
-        System.out.println("Coin: \t\tAmount:");
-        coins.forEach((k, v) -> System.out.println(k + "\t\t" + v));
+    public void addToWallet(Coin coin, int quantity){
+        if (checkIfCoinInWallet(coin)) {
+            coins.computeIfPresent(coin, (k, v) -> v + quantity);
+        } else {
+            coins.put(coin,quantity);
+        }
+    }
+
+    public abstract void printWallet();
+
+    public Map<Coin, Integer> getCoins() {
+        return coins;
     }
 }
