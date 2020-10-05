@@ -60,4 +60,26 @@ class VendingMachineTest {
         vendingMachine.orderProduct(Product.COLA);
         assertEquals(1,vendingMachine.getOrderedProducts().get(Product.COLA));
     }
+
+    @Test
+    void shouldReturnTotalPriceOfOrderedProducts_whenProductsOrdered(){
+        vendingMachine.getStock().populateStock();
+        vendingMachine.orderProduct(Product.COLA);
+        vendingMachine.orderProduct(Product.COLA);
+        vendingMachine.orderProduct(Product.CANDY);
+        vendingMachine.orderProduct(Product.CHIPS);
+        assertEquals(3.15,vendingMachine.countTotalPriceOfOrderedProducts());
+    }
+
+    @Test
+    void shouldReturnTotalValueOfInsertedCoins_whenCoinsInserted(){
+        vendingMachine.insertCoin(Coin.DOLLAR);
+        vendingMachine.insertCoin(Coin.DOLLAR);
+        vendingMachine.insertCoin(Coin.DIME);
+        vendingMachine.insertCoin(Coin.NICKEL);
+        vendingMachine.insertCoin(Coin.QUARTER);
+        vendingMachine.insertCoin(Coin.QUARTER);
+        vendingMachine.insertCoin(Coin.HALF);
+        assertEquals(3.15, vendingMachine.countTotalValueOfInsertedCoins());
+    }
 }
