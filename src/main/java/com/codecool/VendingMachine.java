@@ -83,11 +83,23 @@ public class VendingMachine {
     }
 
     public double countTotalValueOfInsertedCoins(){
-        return 0.00;
+        double total = 0.00;
+        for (Map.Entry<Coin, Integer> entry : insertedCoins.entrySet()) {
+            double coinValue = entry.getKey().getValue();
+            int numberOfCoins = entry.getValue();
+            total += coinValue * numberOfCoins;
+        }
+        return total;
     }
 
     public double countTotalPriceOfOrderedProducts(){
-        return 0.00;
+        double total = 0.00;
+        for (Map.Entry<Product, Integer> entry : orderedProducts.entrySet()) {
+            double productPrice = entry.getKey().getPrice();
+            int numberOfProducts = entry.getValue();
+            total += productPrice * numberOfProducts;
+        }
+        return total;
     }
 
     public boolean checkIfProductSoldOut(Product product) {
