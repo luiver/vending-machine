@@ -25,13 +25,18 @@ public class VendingMachine {
 
     public boolean insertCoin(Coin coin){
         if (checkIfInsertedCoinIsValid(coin)) {
-            if (insertedCoins.get(coin) != null) {
-                insertedCoins.computeIfPresent(coin, (k, v) -> v + 1);
-            } else {
-                insertedCoins.put(coin, 1);
-            }
+            updateInsertedCoinsAmount(coin);
+            return true;
         }
         return false;
+    }
+
+    private void updateInsertedCoinsAmount(Coin coin) {
+        if (insertedCoins.get(coin) != null) {
+            insertedCoins.computeIfPresent(coin, (k, v) -> v + 1);
+        } else {
+            insertedCoins.put(coin, 1);
+        }
     }
 
     private boolean checkIfInsertedCoinIsValid(Coin coin) {
