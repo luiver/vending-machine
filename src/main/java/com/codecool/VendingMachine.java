@@ -23,12 +23,19 @@ public class VendingMachine {
         machineWallet.populateWallet();
     }
 
-    public void insertCoin(Coin coin){
-
+    public boolean insertCoin(Coin coin){
+        if (checkIfInsertedCoinIsValid(coin)) {
+            if (insertedCoins.get(coin) != null) {
+                insertedCoins.computeIfPresent(coin, (k, v) -> v + 1);
+            } else {
+                insertedCoins.put(coin, 1);
+            }
+        }
+        return false;
     }
 
-    private boolean checkIfInsertedCoinIsValid(Coin coin){
-        return false;
+    private boolean checkIfInsertedCoinIsValid(Coin coin) {
+        return !coin.equals(Coin.PENNY);
     }
 
     public void selectProduct(Product product){
