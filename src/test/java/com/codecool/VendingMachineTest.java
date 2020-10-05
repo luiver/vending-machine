@@ -40,22 +40,22 @@ class VendingMachineTest {
 
     @Test
     void shouldAddNewProductIntoOrderedProducts_whenProductOrdered(){
-        vendingMachine.updateOrderedProducts(Product.COLA);
+        vendingMachine.orderProduct(Product.COLA);
         assertEquals(vendingMachine.getOrderedProducts().get(Product.COLA),1);
     }
 
     @Test
     void shouldUpdateProductAmount_whenSecondSameProductOrdered(){
-        vendingMachine.updateOrderedProducts(Product.COLA);
-        vendingMachine.updateOrderedProducts(Product.COLA);
+        vendingMachine.orderProduct(Product.COLA);
+        vendingMachine.orderProduct(Product.COLA);
         assertEquals(vendingMachine.getOrderedProducts().get(Product.COLA),2);
     }
 
     @Test
     void shouldNotAddMoreProductToOrderedProducts_whenProductOutOfStock(){
         vendingMachine.getStock().addToStock(Product.COLA, 1);
-        vendingMachine.updateOrderedProducts(Product.COLA);
-        vendingMachine.updateOrderedProducts(Product.COLA);
+        vendingMachine.orderProduct(Product.COLA);
+        vendingMachine.orderProduct(Product.COLA);
         assertEquals(vendingMachine.getOrderedProducts().get(Product.COLA),1);
     }
 }
