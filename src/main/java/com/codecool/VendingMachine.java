@@ -43,8 +43,23 @@ public class VendingMachine {
         return !coin.equals(Coin.PENNY);
     }
 
-    public void selectProduct(Product product){
+    public boolean orderProduct(Product product){
+        if (checkIfProductSoldOut(product)) {
+            return false;
+        }
+        updateOrderedProducts(product);
+        return true;
+    }
 
+
+    private void updateOrderedProducts(Product product) {
+        int quantity = 1;
+        if (orderedProducts.get(product) != null) {
+            orderedProducts.computeIfPresent(product, (k, v) -> v + quantity);
+        } else {
+            orderedProducts.put(product, quantity);
+        }
+        stock.removeFromStock(product, quantity);
     }
 
     public void cancelTransaction(){
@@ -75,8 +90,8 @@ public class VendingMachine {
         return 0.00;
     }
 
-    public void productSoldOut(){
-
+    public boolean checkIfProductSoldOut(Product product) {
+        return stock.getProductsOnStock().get(product) == 0;
     }
 
     public void exactChangeOnly(){
