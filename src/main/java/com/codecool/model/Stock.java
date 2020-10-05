@@ -21,7 +21,7 @@ public class Stock {
     }
 
     public boolean checkIfProductOnStock(Product product) {
-        return productsOnStock.get(product) > 0;
+        return (productsOnStock.get(product) != null  && productsOnStock.get(product) > 0);
     }
 
     public boolean removeFromStock(Product product, int quantity) {
