@@ -28,27 +28,29 @@ class VendingMachineTest {
     @Test
     void shouldAddNewCoinIntoInsertedCoins_whenCoinInserted(){
         vendingMachine.insertCoin(Coin.DIME);
-        assertEquals(vendingMachine.getInsertedCoins().get(Coin.DIME),1);
+        assertEquals(1, vendingMachine.getInsertedCoins().get(Coin.DIME));
     }
 
     @Test
     void shouldUpdateCoinsAmount_whenSecondSameCoinInserted(){
         vendingMachine.insertCoin(Coin.DIME);
         vendingMachine.insertCoin(Coin.DIME);
-        assertEquals(vendingMachine.getInsertedCoins().get(Coin.DIME),2);
+        assertEquals(2, vendingMachine.getInsertedCoins().get(Coin.DIME));
     }
 
     @Test
     void shouldAddNewProductIntoOrderedProducts_whenProductOrdered(){
+        vendingMachine.getStock().addToStock(Product.COLA, 1);
         vendingMachine.orderProduct(Product.COLA);
-        assertEquals(vendingMachine.getOrderedProducts().get(Product.COLA),1);
+        assertEquals(1, vendingMachine.getOrderedProducts().get(Product.COLA));
     }
 
     @Test
     void shouldUpdateProductAmount_whenSecondSameProductOrdered(){
+        vendingMachine.getStock().addToStock(Product.COLA, 5);
         vendingMachine.orderProduct(Product.COLA);
         vendingMachine.orderProduct(Product.COLA);
-        assertEquals(vendingMachine.getOrderedProducts().get(Product.COLA),2);
+        assertEquals(2,vendingMachine.getOrderedProducts().get(Product.COLA));
     }
 
     @Test
@@ -56,6 +58,6 @@ class VendingMachineTest {
         vendingMachine.getStock().addToStock(Product.COLA, 1);
         vendingMachine.orderProduct(Product.COLA);
         vendingMachine.orderProduct(Product.COLA);
-        assertEquals(vendingMachine.getOrderedProducts().get(Product.COLA),1);
+        assertEquals(1,vendingMachine.getOrderedProducts().get(Product.COLA));
     }
 }
