@@ -63,7 +63,8 @@ public class VendingMachine {
     }
 
     public void cancelTransaction(){
-
+        resetOrderedProducts();
+        returnAllInsertedCoins();
     }
 
     public void resetOrderedProducts(){
