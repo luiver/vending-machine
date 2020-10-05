@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Wallet {
-    public Map<Coin, Integer> coins;
+    protected Map<Coin, Integer> coins;
 
     public Wallet() {
         this.coins = new HashMap<>();
