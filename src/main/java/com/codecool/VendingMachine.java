@@ -74,8 +74,17 @@ public class VendingMachine {
 
     }
 
-    public void countChange(){
+    public boolean checkIfCanAffordForPurchase(){
+        return (countChangeToGive()) >= 0;
+    }
 
+
+    public boolean checkIfNeedToGiveTheChange(){
+        return (countChangeToGive()) > 0;
+    }
+
+    public double countChangeToGive() {
+        return countTotalValueOfInsertedCoins() - countTotalPriceOfOrderedProducts();
     }
 
     public void giveChange(){
