@@ -3,6 +3,7 @@ package com.codecool.service;
 import com.codecool.model.Coin;
 import com.codecool.model.Product;
 import com.codecool.model.Stock;
+import com.codecool.model.Wallet;
 
 import java.util.Map;
 
@@ -11,12 +12,14 @@ public class OrderService {
     private Map<Coin, Integer> insertedCoins;
     private Map<Product, Integer> orderedProducts;
     private ChangeService changeService;
+    private Wallet machineWallet;
 
-    public OrderService(Stock stock, Map<Coin, Integer> insertedCoins, Map<Product, Integer> orderedProducts) {
+    public OrderService(Stock stock, Map<Coin, Integer> insertedCoins, Map<Product, Integer> orderedProducts, Wallet machineWallet ) {
         this.stock = stock;
         this.insertedCoins = insertedCoins;
         this.orderedProducts = orderedProducts;
-        this.changeService = new ChangeService(insertedCoins, orderedProducts);
+        this.machineWallet = machineWallet;
+        this.changeService = new ChangeService(insertedCoins, orderedProducts, machineWallet);
     }
 
     public boolean orderProduct(Product product){

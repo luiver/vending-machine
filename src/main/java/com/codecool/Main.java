@@ -12,5 +12,6 @@ public class Main {
         userWallet.printWallet();
         VendingMachine vendingMachine = new VendingMachine();
         vendingMachine.init();
+        vendingMachine.getOrderService().getChangeService().giveChange(1.65);
     }
 }
