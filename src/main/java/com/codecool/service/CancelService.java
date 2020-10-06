@@ -4,7 +4,6 @@ import com.codecool.model.Coin;
 import com.codecool.model.Product;
 import com.codecool.model.Stock;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class CancelService {
@@ -28,17 +27,16 @@ public class CancelService {
         clearProductsFromMap();
     }
 
-    private void returnOrderedProductsToStock() {
+    public void returnOrderedProductsToStock() {
         orderedProducts.forEach((product, quantity) -> stock.addToStock(product, quantity));
     }
 
-    private void clearProductsFromMap() {
-        orderedProducts = new HashMap<>();
+    public void clearProductsFromMap() {
+        orderedProducts.clear();
     }
 
     public void returnAllInsertedCoins() {
-        //todo temp just clearing map
-        insertedCoins = new HashMap<>();
+        insertedCoins.clear();
     }
 
 }
