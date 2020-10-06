@@ -95,7 +95,6 @@ public class ChangeService {
             int numberOfCoins = entry.getValue();
             total += coinValue * numberOfCoins;
         }
-        System.out.println("TotalValueOfInsertedCoins: "+Math.round(total *100) / 100.00);
         return Math.round(total *100) / 100.00;
     }
 
@@ -106,7 +105,6 @@ public class ChangeService {
             int numberOfProducts = entry.getValue();
             total += productPrice * numberOfProducts;
         }
-        System.out.println("TotalPriceOfOrderedProducts: "+Math.round(total *100) / 100.00);
         return total;
     }
 
