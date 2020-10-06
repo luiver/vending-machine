@@ -44,7 +44,7 @@ public class VendingMachine {
     }
 
     public boolean orderProduct(Product product){
-        if (checkIfProductSoldOut(product)) {
+        if (stock.checkIfProductSoldOut(product)) {
             return false;
         }
         updateOrderedProducts(product);
@@ -67,8 +67,17 @@ public class VendingMachine {
         returnAllInsertedCoins();
     }
 
-    public void resetOrderedProducts(){
+    public void resetOrderedProducts() {
+        returnOrderedProductsToStock();
+        clearProductsFromMap();
+    }
 
+    private void clearProductsFromMap() {
+        orderedProducts = new HashMap<>();
+    }
+
+    private void returnOrderedProductsToStock() {
+        orderedProducts.forEach((product, quantity) -> stock.addToStock(product, quantity));
     }
 
     public void returnAllInsertedCoins(){
@@ -110,10 +119,6 @@ public class VendingMachine {
             total += productPrice * numberOfProducts;
         }
         return total;
-    }
-
-    public boolean checkIfProductSoldOut(Product product) {
-        return stock.getProductsOnStock().get(product) == 0;
     }
 
     public void exactChangeOnly(){

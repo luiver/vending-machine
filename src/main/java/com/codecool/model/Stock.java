@@ -40,6 +40,10 @@ public class Stock {
         }
     }
 
+    public boolean checkIfProductSoldOut(Product product) {
+        return productsOnStock.get(product) == 0;
+    }
+
     public void printStock() {
         System.out.println("\nStock:");
         System.out.println("Product: \tAmount:");
