@@ -16,6 +16,12 @@ public class Stock {
         productsOnStock.put(Product.CANDY, 999);
     }
 
+    public void populateEmptyStock() {
+        productsOnStock.put(Product.COLA, 0);
+        productsOnStock.put(Product.CHIPS, 0);
+        productsOnStock.put(Product.CANDY, 0);
+    }
+
     public boolean checkIfSufficientProductsOnStock(Product product, int quantity) {
         return (productsOnStock.get(product) - quantity) >= 0;
     }
