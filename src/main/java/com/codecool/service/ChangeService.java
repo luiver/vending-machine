@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class ChangeService {
     private final Map<Coin, Integer> insertedCoins;
     private final Map<Product, Integer> orderedProducts;
-    private Wallet machineWallet;
+    private final Wallet machineWallet;
 
     public ChangeService(Map<Coin, Integer> insertedCoins, Map<Product, Integer> orderedProducts, Wallet machineWallet) {
         this.insertedCoins = insertedCoins;
@@ -44,10 +44,10 @@ public class ChangeService {
                     for (int d = 0; d <= total_less_o_h_q / 10; d++) {
                         int total_less_o_h_q_d = total_less_o_h_q - d * 10;
                         for (int n = 0; n <= total_less_o_h_q_d / 5; n++) {
-                            if ((o*100 + h*50 + q*25 + d*10 + n*5) == total) {
+                            if ((o * 100 + h * 50 + q * 25 + d * 10 + n * 5) == total) {
                                 //System.out.printf("%d\t%d\t%d\t%d\t%d\n", o, h, q, d, n);
                                 combinations++;
-                                if(checkIfMachineWalletContainsProperAmountOfCoinsToGiveChange(o, h, q, d, n)){
+                                if (checkIfMachineWalletContainsProperAmountOfCoinsToGiveChange(o, h, q, d, n)) {
                                     coins = addPotentialCombinationOfCoins(coins, o, h, q, d, n);
                                 }
                             }
@@ -108,7 +108,7 @@ public class ChangeService {
         return total;
     }
 
-    public void exactChangeOnly() {
-
+    public boolean checkIfExactChangeIsRequired() {
+        return !checkIfMachineWalletContainsProperAmountOfCoinsToGiveChange(2,2,2,2,2);
     }
 }
