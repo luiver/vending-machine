@@ -32,6 +32,14 @@ public abstract class Wallet {
         }
     }
 
+    public void populateEmptyWallet() {
+        coins.put(Coin.NICKEL, 0);
+        coins.put(Coin.DIME, 0);
+        coins.put(Coin.QUARTER, 0);
+        coins.put(Coin.HALF, 0);
+        coins.put(Coin.DOLLAR, 0);
+    }
+
     public abstract void printWallet();
 
     public Map<Coin, Integer> getCoins() {
