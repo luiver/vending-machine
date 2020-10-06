@@ -1,6 +1,7 @@
 package com.codecool;
 
 import com.codecool.model.*;
+import com.codecool.service.InsertService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,12 +11,14 @@ public class VendingMachine {
     private Wallet machineWallet;
     private Map<Coin, Integer> insertedCoins;
     private Map<Product, Integer> orderedProducts;
+    private InsertService insertService;
 
     public VendingMachine() {
         stock = new Stock();
         machineWallet = new MachineWallet();
         insertedCoins = new HashMap<>();
         orderedProducts = new HashMap<>();
+        insertService = new InsertService(insertedCoins);
     }
 
     public void init(){
@@ -23,25 +26,6 @@ public class VendingMachine {
         machineWallet.populateWallet();
     }
 
-    public boolean insertCoin(Coin coin){
-        if (checkIfInsertedCoinIsValid(coin)) {
-            updateInsertedCoinsAmount(coin);
-            return true;
-        }
-        return false;
-    }
-
-    private void updateInsertedCoinsAmount(Coin coin) {
-        if (insertedCoins.get(coin) != null) {
-            insertedCoins.computeIfPresent(coin, (k, v) -> v + 1);
-        } else {
-            insertedCoins.put(coin, 1);
-        }
-    }
-
-    private boolean checkIfInsertedCoinIsValid(Coin coin) {
-        return !coin.equals(Coin.PENNY);
-    }
 
     public boolean orderProduct(Product product){
         if (stock.checkIfProductSoldOut(product)) {
