@@ -24,7 +24,7 @@ public class VendingMachine {
         orderedProducts = new HashMap<>();
         insertService = new InsertService(insertedCoins);
         orderService = new OrderService(stock, insertedCoins, orderedProducts);
-        cancelService = new CancelService(stock, orderedProducts);
+        cancelService = new CancelService(stock, insertedCoins, orderedProducts);
     }
 
     public void init(){
