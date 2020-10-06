@@ -8,9 +8,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ChangeService {
-    private final Map<Coin, Integer> insertedCoins;
-    private final Map<Product, Integer> orderedProducts;
-    private final Wallet machineWallet;
+    private Map<Coin, Integer> insertedCoins;
+    private Map<Product, Integer> orderedProducts;
+    private Wallet machineWallet;
 
     public ChangeService(Map<Coin, Integer> insertedCoins, Map<Product, Integer> orderedProducts, Wallet machineWallet) {
         this.insertedCoins = insertedCoins;
@@ -95,7 +95,8 @@ public class ChangeService {
             int numberOfCoins = entry.getValue();
             total += coinValue * numberOfCoins;
         }
-        return total;
+        System.out.println("TotalValueOfInsertedCoins: "+Math.round(total *100) / 100.00);
+        return Math.round(total *100) / 100.00;
     }
 
     public double countTotalPriceOfOrderedProducts() {
@@ -105,10 +106,14 @@ public class ChangeService {
             int numberOfProducts = entry.getValue();
             total += productPrice * numberOfProducts;
         }
+        System.out.println("TotalPriceOfOrderedProducts: "+Math.round(total *100) / 100.00);
         return total;
     }
 
-    public boolean checkIfExactChangeIsRequired() {
-        return !checkIfMachineWalletContainsProperAmountOfCoinsToGiveChange(2,2,2,2,2);
+    public String checkIfExactChangeIsRequired() {
+        if (!checkIfMachineWalletContainsProperAmountOfCoinsToGiveChange(2,2,2,2,2)){
+            return "EXACT CHANGE ONLY";
+        }
+        return "INSERT COIN";
     }
 }
