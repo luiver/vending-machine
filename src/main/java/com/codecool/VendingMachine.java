@@ -1,5 +1,6 @@
 package com.codecool;
 
+import com.codecool.controller.ControlPanel;
 import com.codecool.model.*;
 import com.codecool.service.CancelService;
 import com.codecool.service.InsertService;
@@ -16,6 +17,7 @@ public class VendingMachine {
     private InsertService insertService;
     private OrderService orderService;
     private CancelService cancelService;
+    private ControlPanel controlPanel;
 
     public VendingMachine() {
         stock = new Stock();
@@ -23,13 +25,20 @@ public class VendingMachine {
         insertedCoins = new HashMap<>();
         orderedProducts = new HashMap<>();
         insertService = new InsertService(insertedCoins);
-        orderService = new OrderService(stock, insertedCoins, orderedProducts, machineWallet);
         cancelService = new CancelService(stock, insertedCoins, orderedProducts);
+        orderService = new OrderService(stock, insertedCoins, orderedProducts, machineWallet, cancelService);
+        controlPanel = new ControlPanel(insertService, orderService, cancelService);
+    }
+
+    public void run() {
+        controlPanel.runMenu();
     }
 
     public void init(){
         stock.populateStock();
+        //stock.populateEmptyStock();
         machineWallet.populateWallet();
+        //machineWallet.populateEmptyWallet();
     }
 
     public Wallet getMachineWallet() {
