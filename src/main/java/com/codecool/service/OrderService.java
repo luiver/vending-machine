@@ -9,16 +9,12 @@ import java.util.Map;
 
 public class OrderService {
     private Stock stock;
-    private Map<Coin, Integer> insertedCoins;
     private Map<Product, Integer> orderedProducts;
     private ChangeService changeService;
-    private Wallet machineWallet;
 
     public OrderService(Stock stock, Map<Coin, Integer> insertedCoins, Map<Product, Integer> orderedProducts, Wallet machineWallet ) {
         this.stock = stock;
-        this.insertedCoins = insertedCoins;
         this.orderedProducts = orderedProducts;
-        this.machineWallet = machineWallet;
         this.changeService = new ChangeService(insertedCoins, orderedProducts, machineWallet);
     }
 
